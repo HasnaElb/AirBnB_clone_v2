@@ -27,6 +27,6 @@ chown -R ubuntu:ubuntu /data/
 
 if ! grep -q "location \/hbnb_static\/ {" /etc/nginx/sites-available/default; then
 	cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bup
-	sed -i "0,/^\tlocation \/ {$/s/^\tlocation \/ {$/\tlocation \/hbnb_static\/ {\n\t\talias \/data\/web_static\/current\/;\n\t\tautoindex off;\n\t}" /etc/nginx/sites-available/default
+	sed -i '/^\tlocation \/ {$/a \\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t\tautoindex off;\n\t}' /etc/nginx/sites-available/default
 	service nginx reload
 fi
