@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """ Fabric script to distribute an archive to a web server."""
 from fabric.api import env
 from fabric.api import put
@@ -6,7 +6,7 @@ from fabric.api import run
 from os.path import exists
 
 env.hosts = ["100.26.132.166", "100.25.179.168"]
-env.user = '<03dde3405ef7>'
+env.user = "ubuntu"
 
 
 def do_deploy(archive_path):
@@ -20,7 +20,7 @@ def do_deploy(archive_path):
     """
     if not exists(archive_path):
         return False
- 
+
     try:
         # Upload the archive to /tmp/ directory on the web servers
         put(archive_path, '/tmp/')
