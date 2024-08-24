@@ -26,6 +26,7 @@ class DBStorage():
         MySQL_env = getenv('HBNB_ENV')
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(
             MySQL_user, MySQL_pwd, MySQL_host, MySQL_db), pool_pre_ping=True)
+        self.__session = sessionmaker(bind=self.__engine)()
         Base.metadata.create_all(self.__engine)
         if MySQL_env == "test":
             Base.metadata.drop_all(self.__engine)
@@ -78,3 +79,9 @@ class DBStorage():
         Task: 7. Improve engines
         """
         self.__session.close()
+
+import os
+print(f"HBNB_MYSQL_USER: {os.getenv('HBNB_MYSQL_USER')}")
+print(f"HBNB_MYSQL_PWD: {os.getenv('HBNB_MYSQL_PWD')}")
+print(f"HBNB_MYSQL_HOST: {os.getenv('HBNB_MYSQL_HOST')}")
+print(f"HBNB_MYSQL_DB: {os.getenv('HBNB_MYSQL_DB')}")
